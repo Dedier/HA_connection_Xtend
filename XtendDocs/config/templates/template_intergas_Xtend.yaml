@@ -1,0 +1,594 @@
+- sensor:
+    - name: xtend_errorCode
+      unique_id: a86fc7a8-418a-464e-95de-8534ca47b0af
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['4133'] %}
+        {% if value == 0 %}
+          none
+        {% elif value == 1 %}
+          defrost_failed
+        {% elif value == 2 %}
+          low_pressure
+        {% elif value == 3 %}
+          high_pressure
+        {% elif value == 4 %}
+          compressor_outside_op_range
+        {% elif value == 5 %}
+          exhaust_temp_too_high
+        {% elif value == 6 %}
+          condensor_temp_too_high
+        {% elif value == 7 %}
+          outdoorunit_specific_auto_restart
+        {% elif value == 8 %}
+          outdoorunit_specific_locked
+        {% elif value == 9 %}
+          outdoorunit_control_guard
+        {% elif value == 10 %}
+          water_flow_too_low
+        {% elif value == 11 %}
+          water_flow_too_low_defrost
+        {% elif value == 12 %}
+          condensor_gas_too_low
+        {% elif value == 13 %}
+          no_toutdoor_sensor
+        {% elif value == 14 %}
+          pumpdown_failed
+        {% elif value == 15 %}
+          dsh_too_low
+        {% elif value == 16 %}
+          ssh_too_low
+        {% elif value == 17 %}
+          ssh_too_high
+        {% elif value == 18 %}
+          cooling_mode_temps
+        {% elif value == 19 %}
+          condensor_liquid_sensor
+        {% elif value == 20 %}
+          xtp_device_water_inlet
+        {% elif value == 21 %}
+          xtp_device_water_outlet
+        {% elif value == 22 %}
+          xtp_device_refrigerant_liquid
+        {% elif value == 23 %}
+          xtp_device_refrigerant_gas
+        {% elif value == 128 %}
+          ac_bus_voltage_high
+        {% elif value == 129 %}
+          ac_bus_voltage_low
+        {% elif value == 130 %}
+          dc_bus_overvoltage
+        {% elif value == 131 %}
+          compressor_overcurrent_hardware
+        {% elif value == 132 %}
+          compressor_overcurrent_firmware
+        {% elif value == 133 %}
+          ac_input_overcurrent_hardware
+        {% elif value == 134 %}
+          ac_input_overcurrent_firmware
+        {% elif value == 135 %}
+          compressor_current_overload
+        {% elif value == 136 %}
+          phase_loss_loss_of_synchronism
+        {% elif value == 137 %}
+          ipm_temp_protection
+        {% elif value == 138 %}
+          outdoor_dc_fan_fault
+        {% elif value == 139 %}
+          suction_temp_sensor_error
+        {% elif value == 140 %}
+          odu_discharge_temp_sensor_error
+        {% elif value == 141 %}
+          odu_coil_temp_sensor_error
+        {% elif value == 142 %}
+          ambient_temp_sensor_error
+        {% elif value == 143 %}
+          discharge_temp_high_error
+        {% elif value == 144 %}
+          condensing_temp_high_error
+        {% elif value == 145 %}
+          odu_idu_communication_error
+        {% elif value == 146 %}
+          dc_bus_undervoltage
+        {% elif value == 255 %}
+          no_error
+        {% elif value == 65535 %}
+          unconnected
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_software_version
+      unique_id: f2f4dfc0-0c38-4350-8463-7c1809a77dd1
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['47e0']}}
+
+    - name: xtend_currentHpPowerThermal
+      unique_id: 2d3ec316-ab0e-4e95-b909-2a80110f149b
+      unit_of_measurement: "KW"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['503e'] | float / 1000}}
+
+    - name: xtend_currentCop
+      unique_id: faa0c93c-5f46-4ff7-b9ce-bb609af880de
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['5041'] | float / 10 }}
+
+    - name: xtend_currentPowerThermal
+      unique_id: 43815c81-3397-4998-87d0-f983db96b1e6
+      unit_of_measurement: "KW"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['5077'] | float / 1000 }}
+
+    - name: xtend_currentBoilerPowerThermal
+      unique_id: 62b5d445-73d8-4a98-aeed-7f6019064663
+      unit_of_measurement: "KW"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['5088'] | float / 1000 }}
+
+    - name: xtend_currentHpPowerThermal
+      unique_id: 0e69d3ef-d4d4-4df3-9ff3-1a67a422c477
+      unit_of_measurement: "KW"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['503e'] | float / 1000 }}
+
+    - name: xtend_currentPowerElectric
+      unique_id: e891e667-ac7d-4236-99d4-47d623fdaa7a
+      unit_of_measurement: "W"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['50f2'] | float }}
+
+    - name: xtend_temp_flow
+      unique_id: eb6485d8-eb6a-420e-96d4-ee3364dc961e
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e06'] | float }}
+
+    - name: xtend_HpSupply
+      unique_id: 4e500f3f-b25a-4114-be93-dac1a8ff8d49
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7ee6'] | float / 100 }}
+
+    - name: xtend_hpreturn
+      unique_id: d2203543-c663-4acd-9ce2-a2cc03c7f8ff
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e81'] | float / 100 }}
+
+    - name: xtend_heatpumpMode
+      unique_id: 922f22d6-95df-44c3-9404-b37971155faa
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['777d'] %}
+        {% if value == 0 %}
+          Dhw
+        {% elif value == 1 %}
+          Heating
+        {% elif value == 2 %}
+          Cooling
+        {% elif value == 253 %}
+          Pumpdown
+        {% elif value == 254 %}
+          Off
+        {% elif value == 255 %}
+          Undefined
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_roomtemperature_1
+      unique_id: e4ef89b1-6e7e-411f-80df-27903695b1f4
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['79b3'] | float / 100 }}
+
+    - name: xtend_flags
+      unique_id: 34159f9e-a2b3-4239-8033-c3a30c401c50
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['77c3'] %}
+        {% if value == 0 %}
+          Cooling
+        {% elif value == 1 %}
+          Heating
+        {% elif value == 2 %}
+          Defrosting
+        {% elif value == 3 %}
+          Pumpdown
+        {% elif value == 255 %}
+          Undefined
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_tHpReturn
+      unique_id: 4eb57598-df00-430f-ab6e-7e4b769a2ca1
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6280'] | float / 100 }}
+
+    - name: xtend_fSystem
+      unique_id: eb01d884-8e93-4f00-9c44-5f5cbc4aab51
+      unit_of_measurement: "l/min"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['629c'] | float / 100 }}
+
+    - name: xtend_tOutdoor
+      unique_id: 6558fb14-5254-4542-a150-5fe5f32f64fe
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['62d1'] | float / 100 }}
+
+    - name: xtend_tHpSupply
+      unique_id: 3901d9ab-6c33-4a89-bac9-804276e61abe
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['62e7'] | float / 100 }}
+
+    - name: xtend_electricEnergyHeating
+      unique_id: 10bbb3f8-c6a8-4496-afe9-a070189b79a0
+      unit_of_measurement: "KWh"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['63b3'] | float }}
+
+    - name: xtend_thermalEnergyBoiler
+      unique_id: 0f8df2d1-034f-4736-9bb0-01923ae76bbd
+      unit_of_measurement: "KWh"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['63df'] | float }}
+
+    - name: xtend_thermalEnergyHeating
+      unique_id: 090afc83-ce71-408d-8f64-33f2e5ddcd5d
+      unit_of_measurement: "KWh"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['63f0'] | float }}
+
+    - name: xtend_suctionTemperature
+      unique_id: 48a24bd8-1fd7-4fac-93a6-32a65410d878
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6505'] | float /100 }}
+
+    - name: xtend_suctionPressure
+      unique_id: 470226c3-0c1c-429a-8876-abfe0a538fe7
+      unit_of_measurement: "bar"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6579'] | float / 100 }}
+
+    - name: xtend_actualFrequency
+      unique_id: ba8126f6-5415-4094-a785-c739e9d9ecbd
+      unit_of_measurement: "hertz"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['65a7'] | float / 100 }}
+
+    - name: xtend_exhaustPressure
+      unique_id: 05504f25-db49-407f-bc40-ee5391ae358d
+      unit_of_measurement: "bar"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['65b0'] | float / 100 }}
+
+    - name: xtend_coilTemperature
+      unique_id: 61181f64-2a2e-400a-b3c7-1e2771b49a70
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['65c1'] | float / 100 }}
+
+    - name: xtend_exhaustTemperature
+      unique_id: 7edfbf24-2c12-4c7c-ade3-862db9e18ed4
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['65d9'] | float / 100 }}
+
+    - name: xtend_startDefrostCounter
+      unique_id: 7f62f608-9c3a-4997-bcd2-18c59b994fc6
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6a53'] }}
+
+    - name: xtend_startHeatingCounter
+      unique_id: 0d00a9ab-7d08-49b2-a989-e58a0d5415c0
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6a8e'] }}
+
+    - name: xtend_operationHeatingHours
+      unique_id: 583f1d7b-9b75-485e-b536-ed4e9e645a1a
+      unit_of_measurement: "hours"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6ac5'] }}
+
+    - name: xtend_temperatureCondensor_refrigrerant_gas
+      unique_id: fd7055fe-9238-41a1-a4d2-7bb1837e6646
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6c26'] | float / 100 }}
+
+    - name: xtend_exhaustOverheat
+      unique_id: 8927db3a-b2cd-4154-9ac1-4d088e817d53
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6c33'] | float / 100 }}
+
+    - name: xtend_temperatureSubcooling
+      unique_id: d0292de8-b9b4-4326-9e70-951fa55ee96f
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6c53'] | float / 100 }}
+
+    - name: xtend_EEVSteps
+      unique_id: 4633d6f5-c48e-42b5-9422-3276f100c4fb
+      unit_of_measurement: "steps"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6c66'] }}
+
+    - name: xtend_actualFan1Speed
+      unique_id: ab60bd1d-0bfb-4578-a001-2dc6fcd9f555
+      unit_of_measurement: "rpm"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6c8a'] }}
+
+    - name: xtend_temperatureCondensor_refrigrerant_liquid
+      unique_id: 15208ea1-9b0f-4f6e-9180-e5c6aa3ff0ea
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6ceb'] | float / 100 }}
+
+    - name: xtend_suctionOverheat
+      unique_id: ab60bd1d-0bfb-4578-a001-2dc6fcd9f555
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['6cfb'] | float / 100 }}
+
+    - name: xtend_poweron_number
+      unique_id: 259b3cf4-4e15-4f54-8379-010e3db40ebb
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7160'] }}
+
+    - name: xtend_poweron_hours
+      unique_id: 13d1d006-cb08-47f0-83de-0af3d12b60ae
+      unit_of_measurement: "Hours"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['71a7'] }}
+
+    - name: xtend_RequestedTemperature
+      unique_id: 6723eab0-5a27-4af5-a2d3-a5116a827e46
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7767'] | float / 100 }}
+
+    - name: xtend_roomtemperature_set_1
+      unique_id: 87fe1484-4509-41b9-bedd-79b6b07cea1d
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7921'] | float / 100 }}
+
+    - name: xtend_notification_code
+      unique_id: aa33bdb8-9efe-4057-8838-6270c7b32474
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['7940'] %}
+        {% if value == 0 %}
+          PARAMETER_OUT_OF_BOUNDS
+        {% elif value == 1 %}
+          LOW_PRESSURE
+        {% elif value == 2 %}
+          NO_PRESSURE
+        {% elif value == 8 %}
+          XTP_FAULT_HP_OFF
+        {% elif value == 9 %}
+          HEATPUMP_SELECT_PHASE
+        {% elif value == 10 %}
+          HEATPUMP_REMOTE_OF
+        {% elif value == 11 %}
+          HEATPUMP_FAILED
+        {% elif value == 12 %}
+          KWH_METER
+        {% elif value == 13 %}
+          CONDENSOR_OVERHEAT
+        {% elif value == 14 %}
+          ROOMTHERM_FAILED
+        {% elif value == 15 %}
+          CRANKHEATER
+        {% elif value == 16 %}
+          WATER_TEMP_SENSORS
+        {% elif value == 18 %}
+          EEPROM_BROKEN
+        {% elif value == 19 %}
+          BMM_BROKEN
+        {% elif value == 20 %}
+          NO_FLOW_DHW_CIRCUIT
+        {% elif value == 21 %}
+          NO_FLOW_CH_CIRCUIT
+        {% elif value == 22 %}
+          FLOW_CONTROL_DISABLED
+        {% elif value == 23 %}
+          COMMISSIONING_LOW_FLOW
+        {% elif value == 26 %}
+          RTC_TIME_INVALID
+        {% elif value == 27 %}
+          RTC_CLOCK
+        {% elif value == 31 %}
+          _UNKNOWN
+        {% elif value == 32 %}
+          DEFROST_TIMEOUT
+        {% elif value == 33 %}
+          DEFROST_MONITOR_TIMEOUT
+        {% elif value == 37 %}
+          SENSOR_HP_RETURN
+        {% elif value == 38 %}
+          SENSOR_HP_SUPPLY
+        {% elif value == 39 %}
+          SENSOR_SYSTEM_SUPPLY
+        {% elif value == 40 %}
+          SENSOR_OUTDOOR
+        {% elif value == 41 %}
+          SENSOR_CONDENSOR_REF_LIQ
+        {% elif value == 42 %}
+          SENSOR_CONDENSOR_REF_GAS
+        {% elif value == 46 %}
+          SENSOR_BOILER_RETURN
+        {% elif value == 47 %}
+          SENSOR_BOILER_SUPPLY
+        {% elif value == 48 %}
+          BOILER_FLOW_TOO_HIGH
+        {% elif value == 49 %}
+          BOILER_FLOW_TOO_LOW
+        {% elif value == 50 %}
+          BOILER_FLOW_REVERSED
+        {% elif value == 51 %}
+          BOILER_FAULT
+        {% elif value == 52 %}
+          BOILER_OPENTHERM_FAULT
+        {% elif value == 53 %}
+          BOILER_BOILER_SETTING_MAX
+        {% elif value == 54 %}
+          BOILER_NO_CH_REPONSE
+        {% elif value == 60 %}
+          THERMOSTAT_VERSION
+        {% elif value == 255 %}
+          -
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_lockout_code
+      unique_id: 7698c5e1-8f38-4367-99f8-71d55db183a0
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['7e2c'] %}
+        {% if value == 1 %}
+          CH_PUMP
+        {% elif value == 2 %}
+          DHW_PUMP
+        {% elif value == 3 %}
+          CONDENSOR_OVERHEAT
+        {% elif value == 9 %}
+          ERROR_DEVICE
+        {% elif value == 10 %}
+          DEFROST_WATER_TEMP_LOW
+        {% elif value == 18 %}
+          HEATPUMP_TYPE_UNCONFIGURED
+        {% elif value == 19 %}
+          BMM_ILLIGAL_SERIAL
+        {% elif value == 20 %}
+          STORAGEHANDLER_SYNC
+        {% elif value == 22 %}
+          FIRMWARE_COMPATIBILITY
+        {% elif value == 23 %}
+          XTP_DEVICE_INTERNAL_FAULT
+        {% elif value == 24 %}
+          XTP_DEVICE_CONFIG_FAULT
+        {% elif value == 25 %}
+          XTP_COMMUNICATION_FAULT
+        {% elif value == 26 %}
+          XTP_START_FAULT
+        {% elif value == 31 %}
+          ERROR_UNKNOWN
+        {% elif value == 37 %}
+          SENSOR_HP_RETURN
+        {% elif value == 38 %}
+          SENSOR_HP_SUPPLY
+        {% elif value == 39 %}
+          SENSOR_SYSTEM_SUPPLY
+        {% elif value == 40 %}
+          SENSOR_OUTDOOR
+        {% elif value == 46 %}
+          SENSOR_BOILER_RETURN
+        {% elif value == 42 %}
+          SENSOR_CONDENSOR_REF_GAS
+        {% elif value == 46 %}
+          SENSOR_BOILER_RETURN
+        {% elif value == 47 %}
+          SENSOR_BOILER_SUPPLY
+        {% elif value == 50 %}
+          CODE_THERMOSTAT_HEATPUMP
+        {% elif value == 51 %}
+          CODE_THERMOSTAT_BOILER
+        {% elif value == 254 %}
+          BYPASS_MODE_ACTIVE
+        {% elif value == 255 %}
+          -
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_temp_set
+      unique_id: 6ab0519d-6b23-4ee1-92b8-bac20bd67811
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e31'] | float / 100 }}
+
+    - name: xtend_heatdemand_status
+      unique_id: 18cc6f8b-1cd2-4ae7-97b3-1e06336ec3e0
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['7e51'] %}
+        {% if value == 0 %}
+          opentherm
+        {% elif value == 15 %}
+          boiler_ext
+        {% elif value == 37 %}
+          ch_rf
+        {% elif value == 126 %}
+          standby
+        {% elif value == 85 %}
+          sensortest
+        {% elif value == 86 %}
+          commissioning
+        {% elif value == 87 %}
+          crankheating
+        {% elif value == 170 %}
+          service
+        {% elif value == 204 %}
+          dhw
+        {% elif value == 51 %}
+          dhw_int
+        {% elif value == 240 %}
+          boiler_int
+        {% elif value == 153 %}
+          postrun_boiler
+        {% elif value == 102 %}
+          ch
+        {% elif value == 103 %}
+          ch_wait
+        {% elif value == 104 %}
+          defrosting
+        {% elif value == 255 %}
+          heatup
+        {% elif value == 24 %}
+          frost
+        {% elif value == 230 %}
+          starting_ch
+        {% elif value == 231 %}
+          postrun_ch
+        {% elif value == 127 %}
+          off
+        {% elif value == 205 %}
+          dhw_hreco
+        {% elif value == 117 %}
+          starting_cooling
+        {% elif value == 118 %}
+          cooling
+        {% elif value == 119 %}
+          cooling_wait
+        {% elif value == 189 %}
+          postrun_cooling
+        {% else %}
+          Unknown
+        {% endif %}
+
+    - name: xtend_temp_return
+      unique_id: 2b660b70-9591-47e5-8594-7784a551e822
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e81'] | float / 100 }}
+
+    - name: xtend_water_pressure
+      unique_id: 58733d74-d58f-4e90-a4e4-053d465e3d23
+      unit_of_measurement: "bar"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7ed3'] | float / 100 }}
+
+    - name: xtend_temp_supply
+      unique_id: 297725d93-1809-4373-b660-0fc63c9ea0f6
+      unit_of_measurement: "°C"
+      state: >
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7ee6'] | float / 100 }}
+
+    - name: xtend_cop_total
+      unique_id: 1b5bdd12-0c38-417e-a460-0c6a5a2553f9
+      state: >
+        {{ states('sensor.xtend_thermalEnergyHeating') | float / states('sensor.xtend_electricEnergyHeating') | float  }}

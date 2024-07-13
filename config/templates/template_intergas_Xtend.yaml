@@ -4,7 +4,7 @@
       state: >
         {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['4133'] %}
         {% if value == 0 %}
-          none
+          -
         {% elif value == 1 %}
           defrost_failed
         {% elif value == 2 %}
@@ -135,7 +135,7 @@
       unique_id: eb6485d8-eb6a-420e-96d4-ee3364dc961e
       unit_of_measurement: "°C"
       state: >
-        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e06'] | float }}
+        {{ state_attr('sensor.Intergas_Xtend', 'stats')['7e06'] | float / 100 }}
 
     - name: xtend_HpSupply
       unique_id: 4e500f3f-b25a-4114-be93-dac1a8ff8d49
@@ -174,24 +174,6 @@
       unit_of_measurement: "°C"
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['79b3'] | float / 100 }}
-
-    - name: xtend_flags
-      unique_id: 34159f9e-a2b3-4239-8033-c3a30c401c50
-      state: >
-        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['77c3'] %}
-        {% if value == 0 %}
-          Cooling
-        {% elif value == 1 %}
-          Heating
-        {% elif value == 2 %}
-          Defrosting
-        {% elif value == 3 %}
-          Pumpdown
-        {% elif value == 255 %}
-          Undefined
-        {% else %}
-          Unknown
-        {% endif %}
 
     - name: xtend_tHpReturn
       unique_id: 4eb57598-df00-430f-ab6e-7e4b769a2ca1
@@ -240,6 +222,24 @@
       unit_of_measurement: "°C"
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['6505'] | float /100 }}
+
+    - name: xtend_workingMode
+      unique_id: 8db83967-1b28-4803-bfbc-d2d07b3e5978
+      state: >
+        {% set value = state_attr('sensor.Intergas_Xtend', 'stats')['6578'] %}
+        {% if value == 0 %}
+          Cooling
+        {% elif value == 1 %}
+          Heating
+        {% elif value == 2 %}
+          Defrosting
+        {% elif value == 3 %}
+          Pumpdown
+        {% elif value == 255 %}
+          Undefined
+        {% else %}
+          Unknown
+        {% endif %}
 
     - name: xtend_suctionPressure
       unique_id: 470226c3-0c1c-429a-8876-abfe0a538fe7
@@ -324,7 +324,7 @@
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['6ceb'] | float / 100 }}
 
     - name: xtend_suctionOverheat
-      unique_id: ab60bd1d-0bfb-4578-a001-2dc6fcd9f555
+      unique_id: 874b30b8-39c0-4e1e-90a3-59f5057e3141
       unit_of_measurement: "°C"
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['6cfb'] | float / 100 }}
@@ -582,7 +582,9 @@
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['7ee6'] | float / 100 }}
 
+      # Custom calculated xtend entities
     - name: xtend_cop_total
       unique_id: 1b5bdd12-0c38-417e-a460-0c6a5a2553f9
       state: >
         {{ states('sensor.xtend_thermalEnergyHeating') | float / states('sensor.xtend_electricEnergyHeating') | float  }}
+

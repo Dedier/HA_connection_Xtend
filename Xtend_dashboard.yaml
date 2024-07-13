@@ -28,10 +28,6 @@ sections:
           - entity: sensor.xtend_startdefrostcounter
             name: Defrost Cycles
         title: Heatpump Summary
-        visibility:
-          - condition: state
-            entity: sensor.xtend_dashboard_livedata
-            state: "0"
   - type: grid
     cards:
       - type: vertical-stack
@@ -129,7 +125,7 @@ sections:
             name: Fan Speed
           - entity: sensor.xtend_eevsteps
             name: Eev Position
-          - entity: sensor.xtend_code
+          - entity: sensor.xtend_lockout_code
             name: Lockout Code
           - entity: sensor.xtend_notification_code
             name: Notification Code

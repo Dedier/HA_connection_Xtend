@@ -8,7 +8,7 @@ sections:
     cards:
       - type: entities
         entities:
-          - entity: sensor.xtend_requestedtemperature
+          - entity: sensor.xtend_roomtemperature_1
             name: Room
           - entity: sensor.xtend_roomtemperature_set_1
             name: Target
@@ -27,6 +27,8 @@ sections:
             name: Powercycles
           - entity: sensor.xtend_startdefrostcounter
             name: Defrost Cycles
+          - entity: sensor.xtend_software_version
+            name: Software Version
         title: Heatpump Summary
   - type: grid
     cards:
@@ -83,13 +85,25 @@ sections:
             name: Supply temperature
           - entity: sensor.xtend_thpreturn
             name: Return temperature
+      - type: entities
+        entities:
+          - entity: sensor.xtend_currentpowerthermal
+          - entity: sensor.xtend_currentboilerpowerthermal
+          - entity: sensor.xtend_thermalenergyboiler
+          - entity: sensor.xtend_temp_flow
+          - entity: sensor.xtend_temp_set
+          - entity: sensor.xtend_temp_return
+          - entity: sensor.xtend_temp_supply
+        title: Still to fix
   - type: grid
     cards:
       - type: entities
         entities:
+          - entity: sensor.xtend_heatpumpmode
+            name: Heat Demand
           - entity: sensor.xtend_heatdemand_status
             name: Device Status
-          - entity: sensor.xtend_heatpumpmode
+          - entity: sensor.xtend_workingmode
             name: Operational Mode
           - entity: sensor.xtend_water_pressure
             name: Pressure
@@ -113,6 +127,8 @@ sections:
             name: T condensor Gas
           - entity: sensor.xtend_temperaturecondensor_refrigrerant_liquid
             name: T condensor Liquid
+          - entity: sensor.xtend_suctionoverheat
+            name: Suction line Overheat
           - entity: sensor.xtend_exhaustoverheat
             name: Discharge Overheat
           - entity: sensor.xtend_temperaturesubcooling
@@ -129,6 +145,8 @@ sections:
             name: Lockout Code
           - entity: sensor.xtend_notification_code
             name: Notification Code
+          - entity: sensor.xtend_errorcode
+            name: Error Code
         title: Live Data
 cards: []
 background: {}

@@ -144,6 +144,7 @@ So far so good .... it's time to use the obtained data in a dashboard.
 > * The dashboard is created on HA 2024.7.x and uses the new (experimental) Section View Type. Read the [HA blog](https://www.home-assistant.io/blog/2024/03/04/dashboard-chapter-1) for more info.
 > * This dashboard uses a custom Card from HACS: [custom:bignumber-card](https://github.com/custom-cards/bignumber-card) Install this integration before importing the Dashboard code.
 > * I haven't got time to get to the boiler information yet.
+> * The Xtend provide a weird value of **327,67** for pressures and temperatures. I made an appointment with the installer to investigate.
 
 My Xtend Heatpump dashboard looks like this.
 

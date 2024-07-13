@@ -125,12 +125,6 @@
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['5088'] | float / 1000 }}
 
-    - name: xtend_currentHpPowerThermal
-      unique_id: 0e69d3ef-d4d4-4df3-9ff3-1a67a422c477
-      unit_of_measurement: "KW"
-      state: >
-        {{ state_attr('sensor.Intergas_Xtend', 'stats')['503e'] | float / 1000 }}
-
     - name: xtend_currentPowerElectric
       unique_id: e891e667-ac7d-4236-99d4-47d623fdaa7a
       unit_of_measurement: "W"

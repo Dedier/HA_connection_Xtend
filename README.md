@@ -1,6 +1,6 @@
 # HA_connection_Xtend
 
-An HowTo article on connecting the Intergas Xtend hybrid heatpump to Home Assistant via wifi network adapter (multi homed) in three steps:
+An HowTo article on connecting the Intergas Xtend hybrid heatpump to Home Assistant (HA) via wifi network adapter (multi homed) in three steps:
 
 1. Connect HA to Xtend via Wifi
 1. Configure HA templates for Xtend
@@ -27,7 +27,7 @@ In HA network adapters are automatically discovered and available in _Settings /
 >
 > * Make sure Home Assistant and the Xtend unit are within Wifi range of each other.
 > * The IP-range of your LAN cannot overlap with 10.20.30.0/24
-> * Disable auto-config on the HA Network Adapter section. It disables the IP4 configuration of my wifi adapter. The configuration in the image below provides me with a stable connection with the Xtend.
+> * I disabled the auto-config on the HA Network Adapter section, because i suspect it from disabling the IP4 configuration of my wifi adapter. The configuration in the image below provides me with a stable connection with the Xtend.
 > ![HA Network adapter](images/HA_networkAdapter.jpg)
 
 Follow these steps to connect HA to the Xtend:
@@ -52,13 +52,13 @@ Next step is to extract the data from the Xtend API. To make it easy (for me) I 
 
 ### Sensor configuration
 
-In the folder _/config/sensors/_ I configured my custom data sources in seperate yaml files. In HA I have this line in my _configuration.yaml_.
+In the folder _/config/sensors/_ I configured my custom data sources in seperate yaml files. In my _configuration.yaml_ i changed the sensor line with this:
 
 ```yml
     sensor: !include_dir_merge_list sensors
 ```
 
-This line combines all .yaml files in the sensor folder into one configuration for sensors.
+This line combines all .yaml files in the _sensors_ folder into one configuration for sensors.
 
 The sensor folder contains a .yaml file (e.g. [sensor_intergas_Xtend.yaml](config/sensors/sensor_intergas_Xtend.yaml)) with these lines:
 
@@ -74,7 +74,7 @@ The sensor folder contains a .yaml file (e.g. [sensor_intergas_Xtend.yaml](confi
         - stats
 ```
 
-This sensor retrieves every 2 minutes (120 seconds) specific sensordata from the Xtend API.
+This sensor retrieves every 2 minutes (120 seconds) the specified sensordata from the Xtend API.
 
 > [!NOTE]
 > The fields in the URL above are the entities used on the Xtend dashboard described in a paragraph below. No need to request more fields then neccesary. 
@@ -87,12 +87,12 @@ This sensor retrieves every 2 minutes (120 seconds) specific sensordata from the
 To activate the sensor follow these steps:
 
 * Copy the [sensor_intergas_Xtend.yaml](config/sensors/sensor_intergas_Xtend.yaml) in the config / sensors folder
-* Adjust the **sensor:** line in the _configuration.yaml_ as above
+* change the **sensor:** line in the _configuration.yaml_ as above
 * In HA click on _Developer Tools_
 * Click on _Check configuration_
 * When it reports a green message like _Configuration will not prevent Home Assistant from starting!_ you can continue.
-* Load the new configuration with _Restart HA_ or _Quick Reload_.
-* In Developer Tools click on the Tab States and filter on the name of the sensor, in my case _intergas_xtend_.
+* Load the new configuration with _Restart HA_ (mandatory for changes in _configuration.yaml_).
+* In _Developer Tools_ click on the Tab _States_ and filter on the name of the sensor, in my case _intergas_xtend_.
 * You should get a result like the image below
 
 ![States in Developer Tools ](images/HA_DevelopertoolsStates.jpg)
@@ -101,13 +101,13 @@ To activate the sensor follow these steps:
 
 Now we have the Xtend sensordata in HA we need to make sense of it by seperating the values into seperate entities. This is where the templates come in.
 
-Just like with the sensor configuration, I have the template files seperated by Data Source in a templates folder. In HA I have this line in my _configuration.yaml_.
+Just like with the sensor configuration, I have the template files seperated by Data Source in a templates folder. In my _configuration.yaml_ the tempate line look like this:
 
 ```yml
     template: !include_dir_merge_list templates
 ```
 
-The templates folder contains a .yaml file (e.g. template_intergas_Xtend.yaml) with lines like this. For the complete list of entities see [template_intergas_Xtend.yaml](config/templates/template_intergas_Xtend.yaml)
+The templates folder contains a .yaml file (e.g. template_intergas_Xtend.yaml) with lines like below. For the complete list of entities see [template_intergas_Xtend.yaml](config/templates/template_intergas_Xtend.yaml)
 
 ```yml
 - sensor:
@@ -128,7 +128,7 @@ The templates folder contains a .yaml file (e.g. template_intergas_Xtend.yaml) w
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['5041'] | float / 10 }}
 ```
 
-To load this template in HA repeat the steps in the Developer Tools like described in the paragraph _Sensor configuration_. You can also use the _Template entities_ button in the section _Developer Tools/YAML/YAML configuration reloading_.
+To load this template in HA repeat the steps in the _Developer Tools_ like described in the paragraph _Sensor configuration_. You can also use the _Template entities_ button in the section _Developer Tools/YAML/YAML configuration reloading_.
 
 When you succesfully load the template file you will see the entities appear in HA. It should look something like the image below.
 

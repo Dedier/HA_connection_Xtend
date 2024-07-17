@@ -78,7 +78,7 @@ This sensor retrieves every 2 minutes (120 seconds) the specified sensordata fro
 
 > [!NOTE]
 > The fields in the URL above are the entities used on the Xtend dashboard described in a paragraph below. No need to request more fields then neccesary. 
-> There are a lot more fields available from the Xtend API. See the file [parse-message.js](https://github.com/thomasvt1/xtend-bridge/blob/main/parse-message.js) from [thomasvt1](https://github.com/thomasvt1)
+> There are a lot more fields available from the Xtend API. See the file [Known Xtend Codes](Known_Xtend_codes.txt)
 
 > [!TIP]
 > Don't configure a scan interval above 300 (5 min). In my experience the wifi connection will disconnect due to inactivity and you need to repeat the previous paragraph, including climbing the stairs to push the button on the Xtend.

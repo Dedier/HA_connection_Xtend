@@ -133,7 +133,7 @@
 
     - name: xtend_currentPowerElectric
       unique_id: e891e667-ac7d-4236-99d4-47d623fdaa7a
-      unit_of_measurement: "W"
+      unit_of_measurement: "KW"
       state: >
         {{ state_attr('sensor.Intergas_Xtend', 'stats')['50f2'] | float }}
       icon: mdi:power-plug-outline
